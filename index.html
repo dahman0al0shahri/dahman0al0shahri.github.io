@@ -1,22 +1,643 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>دحمان الشهري | Portfolio</title>
-</head>
-<body>
-  <h1>دحمان الشهري</h1>
-  <h2>طالب شبكات واتصالات</h2>
-  <p>
-    هذا موقعي الشخصي لتوثيق رحلتي الأكاديمية، شروحاتي، مشاريعي، وملفاتي التعليمية في مجال الشبكات و CCNA.
-  </p>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dahman Faiz Dahman Al‑Shahri | Technical Networking Portfolio</title>
+<style>
+    /* Import fonts that support both Latin and Arabic scripts */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+    /* Core aesthetic: dark, technical, premium */
+    html, body {
+      margin: 0;
+      /* Use a unified font stack; Montserrat for Latin and Cairo for Arabic */
+      font-family: 'Montserrat', 'Cairo', sans-serif;
+      background-color: #050f20;
+      color: #eaeef5;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
 
-  <h2>الأقسام</h2>
-  <ul>
-    <li>مبادئ شبكات الحاسب</li>
-    <li>شروحات CCNA</li>
-    <li>مشاريع Packet Tracer</li>
-    <li>ملخصات وملفات تعليمية</li>
-  </ul>
+    /* Header styling */
+    header {
+      /* Combine a dark gradient with a subtle technological background image */
+      background: linear-gradient(135deg, #07244d, #00132c),
+                  url('2ad613cd-be61-412c-bc05-e3dec7c33c7e.png') no-repeat center/cover;
+      padding: 80px 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    header p {
+      margin-top: 12px;
+      font-size: 1.2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #cfd8e6;
+    }
+
+    /* Navigation bar */
+    nav {
+      background-color: #001e3c;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+    nav a {
+      color: #a7c4e5;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #003060;
+      color: #ffffff;
+    }
+    /* Language selector */
+    #lang-select {
+      background-color: #001e3c;
+      color: #a7c4e5;
+      border: 1px solid #003060;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.9rem;
+    }
+    #lang-select option {
+      background-color: #001e3c;
+      color: #eaeef5;
+    }
+
+    /* Section structure */
+    section {
+      padding: 50px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    section h2 {
+      margin-bottom: 24px;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #74a7e1;
+      border-bottom: 3px solid #1a4a7a;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    .card {
+      background-color: #0a1d37;
+      border: 1px solid #112c54;
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .tag {
+      background-color: #123a6f;
+      border: 1px solid #274e80;
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      color: #a7c4e5;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 6px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #001e3c;
+      color: #8fa9c7;
+      text-align: center;
+      padding: 24px 0;
+      margin-top: 50px;
+      border-top: 1px solid #112c54;
+    }
+    footer a {
+      color: #74a7e1;
+      text-decoration: underline;
+    }
+
+    /* 3D cubes container */
+    #background-cubes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+      perspective: 1000px;
+    }
+    .cube {
+      position: absolute;
+      transform-style: preserve-3d;
+      animation: rotateCube 30s infinite linear;
+      opacity: 0.4;
+    }
+    .cube div {
+      position: absolute;
+      width: var(--size);
+      height: var(--size);
+      border: 1px solid rgba(255,255,255,0.05);
+      /* Add subtle shadow to enhance the 3D effect */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .cube .front  { background: linear-gradient(135deg, #1f6fb2, #0e3c6d); transform: translateZ(calc(var(--size) / 2)); }
+    .cube .back   { background: linear-gradient(135deg, #174a8f, #092b52); transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); }
+    .cube .right  { background: linear-gradient(135deg, #154880, #0f3664); transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
+    .cube .left   { background: linear-gradient(135deg, #214e8d, #0e3758); transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); }
+    .cube .top    { background: linear-gradient(135deg, #1d579e, #0f3d64); transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
+    .cube .bottom { background: linear-gradient(135deg, #113a67, #0a2a48); transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
+    @keyframes rotateCube {
+      from { transform: rotateX(0deg) rotateY(0deg); }
+      to   { transform: rotateX(360deg) rotateY(360deg); }
+    }
+
+    /* Language visibility control */
+    [data-lang] {
+      display: none;
+    }
+    [data-lang="en"] {
+      display: block;
+    }
+
+    /*
+      Fade and slide in sections when the page loads to create a "magical" transition effect.
+      Each section will animate from a slight offset and scale with a fade-in.
+    */
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    section {
+      opacity: 0;
+      animation: fadeSlideIn 0.8s ease both;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated 3D cubes in the background -->
+  <div id="background-cubes">
+    <!-- Cube 1 -->
+    <div class="cube" style="--size: 150px; top: 8%; left: 12%; animation-duration: 35s;">
+      <div class="front"></div>
+      <div class="back"></div>
+      <div class="right"></div>
+      <div class="left"></div>
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+    <!-- Cube 2 -->
+    <div class="cube" style="--size: 100px; top: 45%; left: 70%; animation-duration: 28s;">
+      <div class="front"></div>
+      <div class="back"></div>
+      <div class="right"></div>
+      <div class="left"></div>
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+    <!-- Cube 3 -->
+    <div class="cube" style="--size: 80px; top: 78%; left: 25%; animation-duration: 22s;">
+      <div class="front"></div>
+      <div class="back"></div>
+      <div class="right"></div>
+      <div class="left"></div>
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+  </div>
+
+  <!-- Header with language containers -->
+  <header>
+    <div data-lang="en">
+      <h1>Dahman Faiz Dahman Al‑Shahri</h1>
+      <p>Technical networks student documenting my journey and showcasing professional expertise.</p>
+    </div>
+    <div data-lang="ar">
+      <h1>دحمان فايز دحمان الشهري</h1>
+      <p>طالب شبكات تقنية يوثق رحلته ويعرض خبرته المهنية.</p>
+    </div>
+    <div data-lang="fr">
+      <h1>Dahman Faiz Dahman Al‑Shahri</h1>
+      <p>Étudiant en réseaux techniques documentant son parcours et présentant son expertise professionnelle.</p>
+    </div>
+  </header>
+
+  <!-- Navigation with language links and selector -->
+  <nav>
+    <a href="#about" data-lang="en">About</a>
+    <a href="#skills" data-lang="en">Skills</a>
+    <a href="#courses" data-lang="en">Courses</a>
+    <a href="#projects" data-lang="en">Projects</a>
+    <a href="#tutorials" data-lang="en">Tutorials</a>
+    <a href="#contact" data-lang="en">Contact</a>
+
+    <a href="#about" data-lang="ar">من أنا</a>
+    <a href="#skills" data-lang="ar">المهارات</a>
+    <a href="#courses" data-lang="ar">المواد</a>
+    <a href="#projects" data-lang="ar">المشاريع</a>
+    <a href="#tutorials" data-lang="ar">الشروحات</a>
+    <a href="#contact" data-lang="ar">التواصل</a>
+
+    <a href="#about" data-lang="fr">À propos</a>
+    <a href="#skills" data-lang="fr">Compétences</a>
+    <a href="#courses" data-lang="fr">Cours</a>
+    <a href="#projects" data-lang="fr">Projets</a>
+    <a href="#tutorials" data-lang="fr">Tutoriels</a>
+    <a href="#contact" data-lang="fr">Contact</a>
+
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="ar">العربية</option>
+      <option value="fr">Français</option>
+    </select>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about">
+    <div data-lang="en">
+      <h2>About</h2>
+      <div class="card">
+        <p>
+          Hello! I’m <strong>Dahman Faiz Dahman Al‑Shahri</strong>, a passionate student of computer networks and telecommunications.
+          I study at the <em>Technical College for Communications and Electronics</em> in Jeddah, Saudi Arabia. My long‑term goal is to become a network engineer and contribute to the field of communications and electronics.
+        </p>
+        <p>
+          As a peer mentor, I regularly help classmates understand networking fundamentals, complete assignments, and prepare for exams. To make my explanations more accessible, I document everything I learn — from lecture notes and lab exercises to project walkthroughs and video tutorials.
+        </p>
+        <p>
+          This website serves as both a public portfolio and a living academic journal. Here you’ll find my notes, labs, projects and resources.
+        </p>
+      </div>
+    </div>
+    <div data-lang="ar">
+      <h2>من أنا</h2>
+      <div class="card">
+        <p>
+          مرحباً! أنا <strong>دحمان فايز دحمان الشهري</strong>، طالب متحمس في مجال شبكات الحاسوب والاتصالات. أدرس في <em>الكلية التقنية للاتصالات والإلكترونيات</em> في جدة، المملكة العربية السعودية. هدفي طويل الأمد هو أن أصبح مهندس شبكات وأسهم في مجال الاتصالات والإلكترونيات.
+        </p>
+        <p>
+          بصفتي موجهاً لزملائي، أساعد زملائي باستمرار على فهم أساسيات الشبكات، وإكمال الواجبات، والاستعداد للامتحانات. لجعل شروحاتي أكثر سهولة، أوثق كل ما أتعلمه — من ملاحظات المحاضرات وتمارين المعمل إلى شروحات المشاريع والدروس المصورة.
+        </p>
+        <p>
+          يعمل هذا الموقع كمحفظة عامة وسجل أكاديمي حي. ستجدون هنا ملاحظاتي ومختبراتي ومشاريعي وموارد أخرى.
+        </p>
+      </div>
+    </div>
+    <div data-lang="fr">
+      <h2>À propos</h2>
+      <div class="card">
+        <p>
+          Bonjour ! Je suis <strong>Dahman Faiz Dahman Al‑Shahri</strong>, un étudiant passionné en réseaux informatiques et télécommunications.
+          J'étudie au <em>Collège technique des télécommunications et de l'électronique</em> à Djeddah, en Arabie saoudite. Mon objectif à long terme est de devenir ingénieur réseau et de contribuer au domaine des communications et de l'électronique.
+        </p>
+        <p>
+          En tant que mentor, j'aide régulièrement mes camarades à comprendre les bases des réseaux, à terminer les devoirs et à se préparer aux examens. Pour rendre mes explications plus accessibles, je documente tout ce que j'apprends — des notes de cours et exercices de laboratoire aux tutoriels et projets vidéo.
+        </p>
+        <p>
+          Ce site sert de portfolio public et de journal académique vivant. Vous y trouverez mes notes, mes travaux pratiques, mes projets et des ressources.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div data-lang="en">
+      <h2>Skills</h2>
+      <div class="card">
+        <div class="tag-list">
+          <span class="tag">Networking Fundamentals</span>
+          <span class="tag">CCNA Basics</span>
+          <span class="tag">Cisco Packet Tracer</span>
+          <span class="tag">IPv4 / IPv6</span>
+          <span class="tag">Subnetting & Addressing</span>
+          <span class="tag">PC Assembly & Troubleshooting</span>
+          <span class="tag">Technical Documentation</span>
+        </div>
+        <p style="margin-top: 20px;">
+          I am continuously expanding my skill set by working through Cisco networking courses, exploring network simulation tools, and building real‑world labs.
+          I enjoy troubleshooting network issues, configuring routers and switches, and designing secure network topologies.
+        </p>
+      </div>
+    </div>
+    <div data-lang="ar">
+      <h2>المهارات</h2>
+      <div class="card">
+        <div class="tag-list">
+          <span class="tag">أساسيات الشبكات</span>
+          <span class="tag">أساسيات CCNA</span>
+          <span class="tag">Packet Tracer (سيسكو)</span>
+          <span class="tag">IPv4 / IPv6</span>
+          <span class="tag">التقسيم الفرعي والعنونة</span>
+          <span class="tag">تجميع الحاسب واستكشاف الأخطاء</span>
+          <span class="tag">التوثيق الفني</span>
+        </div>
+        <p style="margin-top: 20px;">
+          أوسع مهاراتي باستمرار من خلال دراسة دورات سيسكو في الشبكات، واستكشاف أدوات محاكاة الشبكات، وبناء مختبرات حقيقية. أستمتع باستكشاف مشكلات الشبكات، وتكوين الموجهات والمحولات، وتصميم الطوبولوجيات الآمنة.
+        </p>
+      </div>
+    </div>
+    <div data-lang="fr">
+      <h2>Compétences</h2>
+      <div class="card">
+        <div class="tag-list">
+          <span class="tag">Principes fondamentaux des réseaux</span>
+          <span class="tag">Bases du CCNA</span>
+          <span class="tag">Packet Tracer de Cisco</span>
+          <span class="tag">IPv4 / IPv6</span>
+          <span class="tag">Sous‑réseautage et adressage</span>
+          <span class="tag">Assemblage et dépannage PC</span>
+          <span class="tag">Documentation technique</span>
+        </div>
+        <p style="margin-top: 20px;">
+          Je développe en permanence mes compétences en suivant des cours Cisco, en explorant des outils de simulation de réseau et en construisant des laboratoires réels. J'aime dépanner les problèmes de réseau, configurer des routeurs et des commutateurs et concevoir des topologies sécurisées.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section id="courses">
+    <div data-lang="en">
+      <h2>Courses</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Computer Networks Fundamentals</h3>
+          <p>Introduction to networking principles including layered architectures (OSI, TCP/IP), network protocols, IP addressing, subnetting, routing and switching basics.</p>
+        </div>
+        <div class="card">
+          <h3>PC Assembly & Operation</h3>
+          <p>Hands‑on experience assembling personal computers, identifying and replacing components, and troubleshooting hardware and software issues.</p>
+        </div>
+        <div class="card">
+          <h3>Mathematics for Engineers</h3>
+          <p>Applied mathematics covering algebra, calculus and discrete math necessary for understanding networking algorithms and performance analysis.</p>
+        </div>
+        <div class="card">
+          <h3>Operating Systems & Linux</h3>
+          <p>Introduction to operating system concepts with a focus on Linux command line, shell scripting, and system administration tasks relevant to networks.</p>
+        </div>
+      </div>
+    </div>
+    <div data-lang="ar">
+      <h2>المواد</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>أساسيات شبكات الحاسب</h3>
+          <p>مقدمة في مبادئ الشبكات بما يشمل الأنظمة الطبقية (OSI، TCP/IP)، البروتوكولات، عنونة IP، التقسيم الفرعي، أساسيات التوجيه والتبديل.</p>
+        </div>
+        <div class="card">
+          <h3>تجميع وتشغيل الحاسب</h3>
+          <p>خبرة عملية في تجميع الحاسبات الشخصية، التعرف على المكونات واستبدالها، واستكشاف مشكلات الأجهزة والبرمجيات.</p>
+        </div>
+        <div class="card">
+          <h3>الرياضيات للمهندسين</h3>
+          <p>الرياضيات التطبيقية التي تشمل الجبر، وحساب التفاضل والتكامل، والرياضيات المتقطعة اللازمة لفهم خوارزميات الشبكات وتحليل الأداء.</p>
+        </div>
+        <div class="card">
+          <h3>أنظمة التشغيل ولينكس</h3>
+          <p>مقدمة في مفاهيم أنظمة التشغيل مع التركيز على سطر أوامر لينكس، وكتابة السكربتات، ومهام إدارة الأنظمة المتعلقة بالشبكات.</p>
+        </div>
+      </div>
+    </div>
+    <div data-lang="fr">
+      <h2>Cours</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Principes fondamentaux des réseaux informatiques</h3>
+          <p>Introduction aux principes des réseaux, y compris les architectures en couches (OSI, TCP/IP), les protocoles réseau, l'adressage IP, le sous‑réseautage, et les bases du routage et de la commutation.</p>
+        </div>
+        <div class="card">
+          <h3>Assemblage et fonctionnement d'un PC</h3>
+          <p>Expérience pratique en assemblant des ordinateurs personnels, en identifiant et en remplaçant des composants, et en dépannant des problèmes matériels et logiciels.</p>
+        </div>
+        <div class="card">
+          <h3>Mathématiques pour ingénieurs</h3>
+          <p>Mathématiques appliquées couvrant l'algèbre, le calcul et les mathématiques discrètes nécessaires pour comprendre les algorithmes réseau et l'analyse des performances.</p>
+        </div>
+        <div class="card">
+          <h3>Systèmes d'exploitation & Linux</h3>
+          <p>Introduction aux concepts des systèmes d'exploitation avec un accent sur la ligne de commande Linux, les scripts shell et les tâches d'administration système liées aux réseaux.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div data-lang="en">
+      <h2>Projects</h2>
+      <div class="card">
+        <h3>Academic Documentation Website</h3>
+        <p>This portfolio itself is a project — designed to document my academic progress, share tutorials and showcase lab results. It is built using HTML, CSS, and deployed via GitHub Pages.</p>
+      </div>
+      <div class="card">
+        <h3>Packet Tracer Labs</h3>
+        <p>Designed and configured simulated networks using Cisco Packet Tracer. Projects include VLAN segmentation, static and dynamic routing, NAT configuration, and IPv6 implementation.</p>
+      </div>
+      <div class="card">
+        <h3>PC Assembly & Troubleshooting</h3>
+        <p>Completed multiple labs assembling desktop PCs from scratch, troubleshooting common hardware faults, and optimizing performance. Documented each step with photos and notes.</p>
+      </div>
+      <div class="card">
+        <h3>Network Documentation Templates</h3>
+        <p>Developed standardized templates for network diagrams, configuration notes, and troubleshooting checklists to ensure consistent documentation practices across projects.</p>
+      </div>
+    </div>
+    <div data-lang="ar">
+      <h2>المشاريع</h2>
+      <div class="card">
+        <h3>موقع توثيق أكاديمي</h3>
+        <p>هذا الموقع نفسه مشروع — مصمم لتوثيق تقدمي الأكاديمي، ومشاركة الشروحات، وعرض نتائج المختبرات. تم بناؤه باستخدام HTML وCSS ونشره عبر GitHub Pages.</p>
+      </div>
+      <div class="card">
+        <h3>مختبرات Packet Tracer</h3>
+        <p>تم تصميم وتكوين شبكات محاكاة باستخدام Cisco Packet Tracer. تشمل المشاريع تقسيم الشبكات إلى VLAN، التوجيه الثابت والديناميكي، تكوين NAT، وتنفيذ IPv6.</p>
+      </div>
+      <div class="card">
+        <h3>تجميع الحاسب واستكشاف الأخطاء</h3>
+        <p>تم تنفيذ عدة مختبرات لتجميع أجهزة الكمبيوتر المكتبية من الصفر، واستكشاف الأخطاء الشائعة في الأجهزة، وتحسين الأداء. تم توثيق كل خطوة بالصور والملاحظات.</p>
+      </div>
+      <div class="card">
+        <h3>قوالب توثيق الشبكات</h3>
+        <p>تم تطوير قوالب موحدة لمخططات الشبكات، وملاحظات التكوين، وقوائم التحقق من استكشاف الأخطاء لضمان ممارسة توثيق متسقة عبر المشاريع.</p>
+      </div>
+    </div>
+    <div data-lang="fr">
+      <h2>Projets</h2>
+      <div class="card">
+        <h3>Site de documentation académique</h3>
+        <p>Ce portfolio est lui‑même un projet — conçu pour documenter ma progression académique, partager des tutoriels et présenter les résultats des laboratoires. Il est construit en HTML, CSS et déployé via GitHub Pages.</p>
+      </div>
+      <div class="card">
+        <h3>Laboratoires Packet Tracer</h3>
+        <p>Conception et configuration de réseaux simulés à l'aide de Cisco Packet Tracer. Les projets comprennent la segmentation VLAN, le routage statique et dynamique, la configuration NAT et la mise en œuvre d'IPv6.</p>
+      </div>
+      <div class="card">
+        <h3>Assemblage et dépannage PC</h3>
+        <p>Réalisation de plusieurs laboratoires pour assembler des ordinateurs de bureau à partir de zéro, dépanner les pannes matérielles courantes et optimiser les performances. Chaque étape est documentée avec des photos et des notes.</p>
+      </div>
+      <div class="card">
+        <h3>Modèles de documentation réseau</h3>
+        <p>Développement de modèles standardisés pour les schémas réseau, les notes de configuration et les listes de vérification de dépannage afin d'assurer des pratiques de documentation cohérentes dans les projets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tutorials Section -->
+  <section id="tutorials">
+    <div data-lang="en">
+      <h2>Tutorials & Resources</h2>
+      <div class="card">
+        <p>I frequently create video tutorials and written guides to help my peers grasp complex concepts. Most tutorials are hosted on external platforms (e.g., YouTube, Google Drive) and cover topics such as:</p>
+        <ul>
+          <li>Subnetting and CIDR notation explained step‑by‑step</li>
+          <li>Installing and configuring Cisco Packet Tracer</li>
+          <li>Routing protocols overview (RIP, OSPF, EIGRP)</li>
+          <li>Introduction to IPv6 addressing and transition techniques</li>
+          <li>Command line navigation in Linux for networking tasks</li>
+        </ul>
+        <p>As this portfolio evolves, I will embed or link these tutorials here, along with downloadable lab instructions and cheat sheets.</p>
+      </div>
+    </div>
+    <div data-lang="ar">
+      <h2>الشروحات والموارد</h2>
+      <div class="card">
+        <p>أقوم بإنشاء شروحات فيديو وأدلة مكتوبة بشكل متكرر لمساعدة زملائي على فهم المفاهيم المعقدة. معظم الشروحات مستضافة على منصات خارجية (مثل يوتيوب وGoogle Drive) وتغطي المواضيع التالية:</p>
+        <ul>
+          <li>شرح التقسيم الفرعي وترقيم CIDR خطوة بخطوة</li>
+          <li>تثبيت وتكوين Cisco Packet Tracer</li>
+          <li>نظرة عامة على بروتوكولات التوجيه (RIP وOSPF وEIGRP)</li>
+          <li>مقدمة عن عنونة IPv6 وتقنيات الانتقال</li>
+          <li>التنقل عبر سطر الأوامر في لينكس للمهام الشبكية</li>
+        </ul>
+        <p>مع تطور هذا الموقع، سأقوم بتضمين أو ربط هذه الشروحات هنا، إلى جانب تعليمات المختبرات وأوراق الغش القابلة للتنزيل.</p>
+      </div>
+    </div>
+    <div data-lang="fr">
+      <h2>Tutoriels et ressources</h2>
+      <div class="card">
+        <p>Je crée fréquemment des tutoriels vidéo et des guides écrits pour aider mes pairs à maîtriser des concepts complexes. La plupart des tutoriels sont hébergés sur des plateformes externes (par exemple YouTube, Google Drive) et couvrent les sujets suivants :</p>
+        <ul>
+          <li>Explication du sous-réseautage et de la notation CIDR étape par étape</li>
+          <li>Installation et configuration de Cisco Packet Tracer</li>
+          <li>Aperçu des protocoles de routage (RIP, OSPF, EIGRP)</li>
+          <li>Introduction à l'adressage IPv6 et aux techniques de transition</li>
+          <li>Navigation en ligne de commande dans Linux pour les tâches réseau</li>
+        </ul>
+        <p>À mesure que ce site évolue, j'y intégrerai ou lierai ces tutoriels ici, avec des instructions de laboratoire téléchargeables et des antisèches.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div data-lang="en">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>If you have questions, suggestions, or opportunities, feel free to reach out:</p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:placeholder@example.com">placeholder@example.com</a> (replace with your contact email)</li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/dahman0aloshahri" target="_blank" rel="noopener">github.com/dahman0aloshahri</a></li>
+          <li><strong>LinkedIn:</strong> Coming soon</li>
+        </ul>
+        <p>I am open to collaboration on projects, internships, and professional networking.</p>
+      </div>
+    </div>
+    <div data-lang="ar">
+      <h2>التواصل</h2>
+      <div class="card">
+        <p>إذا كان لديك أسئلة أو اقتراحات أو فرص، فلا تتردد في الاتصال بي:</p>
+        <ul>
+          <li><strong>البريد الإلكتروني:</strong> <a href="mailto:placeholder@example.com">placeholder@example.com</a> (استبدلها ببريدك)</li>
+          <li><strong>جيتهب:</strong> <a href="https://github.com/dahman0aloshahri" target="_blank" rel="noopener">github.com/dahman0aloshahri</a></li>
+          <li><strong>لينكدإن:</strong> قريباً</li>
+        </ul>
+        <p>أنا منفتح للتعاون في المشاريع، وفرص التدريب، وبناء علاقات مهنية.</p>
+      </div>
+    </div>
+    <div data-lang="fr">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Si vous avez des questions, des suggestions ou des opportunités, n'hésitez pas à me contacter :</p>
+        <ul>
+          <li><strong>Email :</strong> <a href="mailto:placeholder@example.com">placeholder@example.com</a> (remplacez par votre adresse)</li>
+          <li><strong>GitHub :</strong> <a href="https://github.com/dahman0aloshahri" target="_blank" rel="noopener">github.com/dahman0aloshahri</a></li>
+          <li><strong>LinkedIn :</strong> Bientôt disponible</li>
+        </ul>
+        <p>Je suis ouvert à la collaboration sur des projets, des stages et au réseautage professionnel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div data-lang="en">
+      <p>© 2026 Dahman Faiz Dahman Al‑Shahri – Technical Networking Portfolio</p>
+      <p>Built with <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a></p>
+    </div>
+    <div data-lang="ar">
+      <p>© 2026 دحمان فايز دحمان الشهري – محفظة الشبكات التقنية</p>
+      <p>تم الإنشاء باستخدام <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a></p>
+    </div>
+    <div data-lang="fr">
+      <p>© 2026 Dahman Faiz Dahman Al‑Shahri – Portfolio des réseaux techniques</p>
+      <p>Construit avec <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Language switcher functionality
+    document.getElementById('lang-select').addEventListener('change', function() {
+      var selectedLang = this.value;
+      // Update visibility for each element marked with data-lang
+      var elements = document.querySelectorAll('[data-lang]');
+      elements.forEach(function(el) {
+        if (el.getAttribute('data-lang') === selectedLang) {
+          el.style.display = 'block';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
